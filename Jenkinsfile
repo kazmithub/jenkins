@@ -1,10 +1,10 @@
 #!/usr/bin/env groovy
 
 node {
-  def last_commit= sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
+  // def last_commit= sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
 
   stage 'Checkout'
-  // git 'https://github.com/kazmithub/jenkins'
+  git 'https://github.com/kazmithub/jenkins'
  
   // stage 'Docker build'
   // docker.build('demo')
