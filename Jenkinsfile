@@ -17,7 +17,8 @@ node {
   stage('Deploy') {
        // Override image field in taskdef file
        // sh "sed -i 's|{{image}}|${docker_repo_uri}:${last_commit}|' taskdef.json"
-       // sh "docker push ${docker_repo_uri}:"
+       sh "sed -i 's|{{image}}|${docker_repo_uri}:latest|' taskdef.json"
+       sh "docker push ${docker_repo_uri}:"
        // Create a new task definition revision
        // sh "aws ecs register-task-definition --execution-role-arn arn:aws:iam::853219876644:role/Jenkins --cli-input-json file://taskdef.json --region ${region}"
        // Update service on Fargate
