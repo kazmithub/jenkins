@@ -10,12 +10,13 @@ node {
   // docker.build('demo')
 
   stage 'Docker push'
-  docker.withRegistry('https://853219876644.dkr.ecr.us-west-2.amazonaws.com', 'ecr:us-west-2:demo-ecr-credentials') {
+  docker.withRegistry('https://853219876644.dkr.ecr.us-west-2.amazonaws.com/demo', 'ecr:us-west-2:demo-ecr-credentials') {
     // docker.image('demo').push("${last_commit}")
     docker.image('demo').push()
   }
   
   stage('Deploy') {
+    withAWS(role:'role-name', roleAccount:'roleAccount', externalId: 'roleExternalId', duration: 900, roleSessionName: 'jenkins-session')
        // Override image field in taskdef file
        // sh "sed -i 's|{{image}}|${docker_repo_uri}:${last_commit}|' taskdef.json"
        sh "sed -i 's|{{image}}|${docker_repo_uri}|' taskdef.json"
