@@ -16,7 +16,6 @@ node {
   }
   
   stage('Deploy') {
-    withAWS(role:'role-name', roleAccount:'roleAccount', externalId: 'roleExternalId', duration: 900, roleSessionName: 'jenkins-session')
        // Override image field in taskdef file
        // sh "sed -i 's|{{image}}|${docker_repo_uri}:${last_commit}|' taskdef.json"
        sh "sed -i 's|{{image}}|${docker_repo_uri}|' taskdef.json"
