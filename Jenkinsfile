@@ -27,5 +27,8 @@ node {
        // sh "aws cloudformation update-stack --stack-name stackEc2 --region us-west-2 --template-url https://ahsan-tf.s3-us-west-2.amazonaws.com/cfn.yaml"
        sh "aws s3 ls"
        sh "aws cloudformation delete-stack --stack-name stackEc2" //--region us-west-2 --template-url https://ahsan-tf.s3-us-west-2.amazonaws.com/cfn.yaml"
+       wget "https://ahsan-tf.s3-us-west-2.amazonaws.com/cfn.yaml"
+       cat cfn.yaml
+       rm cfn.yaml
   }
 }
