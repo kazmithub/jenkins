@@ -25,10 +25,13 @@ node {
        // Update service on Fargate
        // sh "aws ecs update-service --cluster ${cluster} --service v1-WebServer-Service --task-definition ${task_def_arn} --region ${region}"
        // sh "aws cloudformation update-stack --stack-name stackEc2 --region us-west-2 --template-url https://ahsan-tf.s3-us-west-2.amazonaws.com/cfn.yaml"
-       sh "aws s3 ls"
-       sh "aws cloudformation delete-stack --stack-name stackEc2 --region us-west-2" // --template-url https://ahsan-tf.s3-us-west-2.amazonaws.com/cfn.yaml"
-       sh "wget https://ahsan-tf.s3-us-west-2.amazonaws.com/cfn.yaml"
-       sh "cat cfn.yaml"
-       sh "rm cfn.yaml"
+       // sh "aws s3 ls"
+       // sh "aws cloudformation delete-stack --stack-name stackEc2 --region us-west-2" // --template-url https://ahsan-tf.s3-us-west-2.amazonaws.com/cfn.yaml"
+       // sh "wget https://ahsan-tf.s3-us-west-2.amazonaws.com/cfn.yaml"
+       // sh "cat cfn.yaml"
+       // sh "rm cfn.yaml"
+       withAWS(region:'us-west-2') {
+       cfnUpdate(stack:'stackEcs', url:'https://ahsan-tf.s3-us-west-2.amazonaws.com/alb.yaml')
+}
   }
 }
