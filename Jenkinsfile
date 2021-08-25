@@ -31,7 +31,7 @@ node {
        // sh "cat cfn.yaml"
        // sh "rm cfn.yaml"
        withAWS(region:'us-west-2') {
-       def outputs = cfnUpdate(stack:'stackEcs', url:'https://ahsan-tf.s3-us-west-2.amazonaws.com/alb.yaml')
+       def outputs = cfnUpdate(stack:'stackEcs',params:['networkMode': 'bridge'], url:'https://ahsan-tf.s3-us-west-2.amazonaws.com/alb.yaml')
 }
   }
 }
