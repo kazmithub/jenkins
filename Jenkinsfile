@@ -31,7 +31,8 @@ node {
        // sh "cat cfn.yaml"
        // sh "rm cfn.yaml"
        withAWS(region:'us-west-2') {
-         def outputs = cfnUpdate(stack:'stackEcs',params:['networkMode': '${networkMode}', 'albSg': '${albSg}', 'subnet1': '${subnet1}', 'subnet2': '${subnet2}', 'vpc': '${vpc}', 'cluster': '${cluster}', 'roleArn': '${roleArn}', 'desiredCount': '${desiredCount}', 'networkMode': '${networkMode}'], url:'https://ahsan-tf.s3-us-west-2.amazonaws.com/alb.yaml')
-}
+         def outputs = cfnUpdate(stack:'stackEcs',params:['networkMode': '${networkMode}', 'albSg': '${albSg}'], url:'https://ahsan-tf.s3-us-west-2.amazonaws.com/alb.yaml')
+         
+       }
   }
 }
