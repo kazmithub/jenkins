@@ -6,8 +6,8 @@ node {
   stage 'Checkout'
   git 'https://github.com/kazmithub/jenkins'
  
-  // stage 'Docker build'
-  // docker.build('demo')
+  stage 'Docker build'
+  docker.build('demo')
 
   stage 'Docker push'
   docker.withRegistry('https://853219876644.dkr.ecr.us-west-2.amazonaws.com', 'ecr:us-west-2:demo-ecr-credentials') {
