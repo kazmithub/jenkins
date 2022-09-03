@@ -17,20 +17,17 @@ node {
   
   stage('Deploy') {
        // Override image field in taskdef file
-       // sh "sed -i 's|{{image}}|${docker_repo_uri}:${last_commit}|' taskdef.json"
-       sh "sed -i 's|{{image}}|${docker_repo_uri}|' taskdef.json"
+       sh "sed -i 's|{{image}}|${docker_repo_uri}:${last_commit}|' taskdef.json"
+       // sh "sed -i 's|{{image}}|${docker_repo_uri}|' taskdef.json"
        // sh "docker push ${docker_repo_uri}:"
        // Create a new task definition revision
        sh "aws ecs register-task-definition --execution-role-arn arn:aws:iam::853219876644:role/Jenkins --cli-input-json file://taskdef.json --region ${region}"
-       // Update service on Fargate
+       // Update service
        sh "aws ecs update-service --cluster ${cluster} --service v1-taskDefinition --task-definition ${task_def_arn} --region ${region}"
+       
        // sh "aws cloudformation update-stack --stack-name stackEc2 --region us-west-2 --template-url https://ahsan-tf.s3-us-west-2.amazonaws.com/cfn.yaml"
-       // sh "aws s3 ls"
-       // sh "aws cloudformation delete-stack --stack-name stackEc2 --region us-west-2" // --template-url https://ahsan-tf.s3-us-west-2.amazonaws.com/cfn.yaml"
-       // sh "wget https://ahsan-tf.s3-us-west-2.amazonaws.com/cfn.yaml"
-       // sh "cat cfn.yaml"
-       // sh "rm cfn.yaml"
-       withAWS(region:'us-west-2') {
+       
+    withAWS(region:'us-west-2') {
         def outputs = cfnUpdate(stack:'stackEcs',params:['networkMode': "${networkMode}", 'albSg': "${albSg}", 'subnet1': "${subnet1}", 'subnet2': "${subnet2}", 'vpc': "${vpc}", 'cluster': "${cluster}", 'roleArn': "${roleArn}", 'desiredCount': "${desiredCount}"], url:'https://ahsan-tf.s3-us-west-2.amazonaws.com/alb.yaml')
          
        }
