@@ -20,17 +20,18 @@ node {
        sh "sed -i 's|{{image}}|${docker_repo_uri}:${last_commit}|' taskdef.json"
        
        sh "def taskDefImage='${docker_repo_uri}'+':'+'${last_commit}'"
+       sh "echo '${taskDefImage}'"
        // sh "sed -i 's|{{image}}|${docker_repo_uri}|' taskdef.json"
        // sh "docker push ${docker_repo_uri}:"
        // Create a new task definition revision
-       sh "aws ecs register-task-definition --execution-role-arn arn:aws:iam::853219876644:role/Jenkins --cli-input-json file://taskdef.json --region ${region}"
+       //sh "aws ecs register-task-definition --execution-role-arn arn:aws:iam::853219876644:role/Jenkins --cli-input-json file://taskdef.json --region ${region}"
        // Update service
-       sh "aws ecs update-service --cluster ${cluster} --service v1-taskDefinition --task-definition ${task_def_arn} --region ${region}"
+       //sh "aws ecs update-service --cluster ${cluster} --service v1-taskDefinition --task-definition ${task_def_arn} --region ${region}"
        
        // sh "aws cloudformation update-stack --stack-name stackEc2 --region us-west-2 --template-url https://ahsan-tf.s3-us-west-2.amazonaws.com/cfn.yaml"
        
-    withAWS(region:'us-west-2') {
-        def outputs = cfnUpdate(stack:'stackEcs',params:['networkMode': "${networkMode}", 'albSg': "${albSg}", 'subnet1': "${subnet1}", 'subnet2': "${subnet2}", 'vpc': "${vpc}", 'cluster': "${cluster}", 'roleArn': "${roleArn}", 'desiredCount': "${desiredCount}"], url:'https://ahsan-tf.s3-us-west-2.amazonaws.com/alb.yaml')
+    //withAWS(region:'us-west-2') {
+    //    def outputs = cfnUpdate(stack:'stackEcs',params:['networkMode': "${networkMode}", 'albSg': "${albSg}", 'subnet1': "${subnet1}", 'subnet2': "${subnet2}", 'vpc': "${vpc}", 'cluster': "${cluster}", 'roleArn': "${roleArn}", 'desiredCount': "${desiredCount}"], url:'https://ahsan-tf.s3-us-west-2.amazonaws.com/alb.yaml')
          
        }
   }
