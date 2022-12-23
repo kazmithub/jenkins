@@ -21,7 +21,7 @@ node {
        
        sh "taskDefImage='${docker_repo_uri}'+':'+'${last_commit}'"
        sh "echo '--------------------------'"
-       sh "echo '${taskDefImage}'"
+       sh "echo {taskDefImage}"
        sh "echo '--------------------------'"
        // sh "sed -i 's|{{image}}|${docker_repo_uri}|' taskdef.json"
        // sh "docker push ${docker_repo_uri}:"
