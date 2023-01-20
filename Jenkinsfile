@@ -20,9 +20,6 @@ node {
        sh "sed -i 's|{{image}}|${docker_repo_uri}:${last_commit}|' taskdef.json"
        
        sh "taskDefImage='${docker_repo_uri}'+':'+'${last_commit}'"
-       sh "echo '--------------------------'"
-       sh "echo {taskDefImage}"
-       sh "echo '--------------------------'"
        // sh "sed -i 's|{{image}}|${docker_repo_uri}|' taskdef.json"
        // sh "docker push ${docker_repo_uri}:"
        // Create a new task definition revision
@@ -33,7 +30,7 @@ node {
        // sh "aws cloudformation update-stack --stack-name stackEc2 --region us-west-2 --template-url https://ahsan-tf.s3-us-west-2.amazonaws.com/cfn.yaml"
        
     //withAWS(region:'us-west-2') {
-    //    def outputs = cfnUpdate(stack:'stackEcs',params:['networkMode': "${networkMode}", 'albSg': "${albSg}", 'subnet1': "${subnet1}", 'subnet2': "${subnet2}", 'vpc': "${vpc}", 'cluster': "${cluster}", 'roleArn': "${roleArn}", 'desiredCount': "${desiredCount}"], url:'https://ahsan-tf.s3-us-west-2.amazonaws.com/alb.yaml')
+    //    def outputs = cfnUpdate(stack:'stackEcs',params:['taskDefImage': '${taskDefImage}','networkMode': "${networkMode}", 'albSg': "${albSg}", 'subnet1': "${subnet1}", 'subnet2': "${subnet2}", 'vpc': "${vpc}", 'cluster': "${cluster}", 'roleArn': "${roleArn}", 'desiredCount': "${desiredCount}"], url:'https://ahsan-tf.s3-us-west-2.amazonaws.com/alb.yaml')
          
     //   }
   }
