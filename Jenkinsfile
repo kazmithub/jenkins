@@ -25,7 +25,7 @@ node {
        // Create a new task definition revision
        sh "aws ecs register-task-definition --execution-role-arn arn:aws:iam::853219876644:role/Jenkins --cli-input-json file://taskdef.json --region ${region}"
        // Update service
-       sh "aws ecs update-service --cluster ${cluster} --service v1-taskDefinition --task-definition ${task_def_arn} --region ${region}"
+       // sh "aws ecs update-service --cluster ${cluster} --service v1-taskDefinition --region ${region}"
        
        // sh "aws cloudformation update-stack --stack-name stackEc2 --region us-west-2 --template-url https://ahsan-tf.s3-us-west-2.amazonaws.com/cfn.yaml"
        
