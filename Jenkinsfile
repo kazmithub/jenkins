@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-taskDefImage= 'initial_value'
+taskDefImage= 'nginx'
 
 node {
   def last_commit= sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
