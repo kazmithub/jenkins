@@ -30,7 +30,14 @@ node {
        // sh "aws ecs update-service --cluster ${cluster} --service v1-taskDefinition --region ${region}"
        
        // sh "aws cloudformation update-stack --stack-name stackEc2 --region us-west-2 --template-url https://ahsan-tf.s3-us-west-2.amazonaws.com/cfn.yaml"
-       
+    
+    sh "echo '1111'"
+    sh "echo ${taskDefImage}"
+    sh "echo '111122222'"
+    sh "echo taskDefImage"
+    sh "echo '11113333'"
+    sh "echo 'taskDefImage'" 
+    
     //   withAWS(region:'us-west-2') {
     //     def outputs = cfnUpdate(stack:'stackEcs',params:['serviceName': "${serviceName}",'taskDefImage': "${taskDefImage}",'networkMode': "${networkMode}", 'albSg': "${albSg}", 'subnet1': "${subnet1}", 'subnet2': "${subnet2}", 'vpc': "${vpc}", 'cluster': "${cluster}", 'roleArn': "${roleArn}", 'desiredCount': "${desiredCount}"], url:'https://ahsan-tf.s3-us-west-2.amazonaws.com/alb.yaml')
          
