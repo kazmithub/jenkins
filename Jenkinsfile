@@ -20,12 +20,13 @@ node {
   stage('Deploy') {
        // Override image field in taskdef file
        sh "sed -i 's|{{image}}|${docker_repo_uri}:${last_commit}|' taskdef.json"
-       
-    sh "echo '1111'"
-    sh "echo ${taskDefImage}"
-    sh "echo '111122222'"
     
        sh "taskDefImage='${docker_repo_uri}:${last_commit}'"
+    
+       sh "echo '1111'"
+       sh "echo ${taskDefImage}"
+       sh "echo '111122222'"
+
        // sh "sed -i 's|{{image}}|${docker_repo_uri}|' taskdef.json"
        // sh "docker push ${docker_repo_uri}:"
        // Create a new task definition revision
