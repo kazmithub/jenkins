@@ -21,7 +21,7 @@ node {
        // Override image field in taskdef file
        sh "sed -i 's|{{image}}|${docker_repo_uri}:${last_commit}|' taskdef.json"
     
-       sh "taskDefImage='${docker_repo_uri}:${last_commit}'"
+       taskDefImage="${docker_repo_uri}:${last_commit}"
     
        sh "echo '1111'"
        sh "echo ${taskDefImage}"
