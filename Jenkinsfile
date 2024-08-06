@@ -32,12 +32,12 @@ node {
        
        // sh "aws cloudformation update-stack --stack-name stackEc2 --region us-west-2 --template-url https://ahsan-tf.s3-us-west-2.amazonaws.com/cfn.yaml"
         
-       comp= "h "aws ecs list-services --cluster prod1-WebServer-Cluster --region ${region} | cut -d / -f 2""
+       comp= "sh "aws ecs list-services --cluster prod1-WebServer-Cluster --region ${region} | cut -d / -f 2""
        sh "echo ${comp}"
     
-      withAWS(region:'us-west-2') {
-        def outputs = cfnUpdate(stack:'stackEcs',params:['createNewService': "${createNewService}",'serviceName': "${serviceName}",'taskDefImage': "${taskDefImage}",'networkMode': "${networkMode}", 'albSg': "${albSg}", 'subnet1': "${subnet1}", 'subnet2': "${subnet2}", 'vpc': "${vpc}", 'cluster': "${cluster}", 'roleArn': "${roleArn}", 'desiredCount': "${desiredCount}"], url:'https://ahsan-tf.s3-us-west-2.amazonaws.com/alb.yaml')
+     // withAWS(region:'us-west-2') {
+      //  def outputs = cfnUpdate(stack:'stackEcs',params:['createNewService': "${createNewService}",'serviceName': "${serviceName}",'taskDefImage': "${taskDefImage}",'networkMode': "${networkMode}", 'albSg': "${albSg}", 'subnet1': "${subnet1}", 'subnet2': "${subnet2}", 'vpc': "${vpc}", 'cluster': "${cluster}", 'roleArn': "${roleArn}", 'desiredCount': "${desiredCount}"], url:'https://ahsan-tf.s3-us-west-2.amazonaws.com/alb.yaml')
          
-    }
+  //  }
   }
 }
