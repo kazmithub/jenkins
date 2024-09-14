@@ -31,8 +31,8 @@ node {
        // sh "aws ecs update-service --cluster ${cluster} --service v1-taskDefinition --region ${region}"
        
        // sh "aws cloudformation update-stack --stack-name stackEc2 --region us-west-2 --template-url https://ahsan-tf.s3-us-west-2.amazonaws.com/cfn.yaml"
-        
-       comp= "sh "aws ecs list-services --cluster prod1-WebServer-Cluster --region ${region} | cut -d / -f 2""
+        comp = sh (script: "aws ecs list-services --cluster prod1-WebServer-Cluster --region ${region} | cut -d / -f 2")
+      // comp= "aws ecs list-services --cluster prod1-WebServer-Cluster --region ${region} | cut -d / -f 2"
        sh "echo ${comp}"
     
      // withAWS(region:'us-west-2') {
