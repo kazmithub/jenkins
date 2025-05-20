@@ -34,7 +34,7 @@ node {
       // def foo = sh "aws ecs list-services --region ${region} --cluster prod1-WebServer-Cluster | cut -d / -f 2"
     //  echo "${foo}"
       withAWS(region:'us-west-2') {
-        def outputs = cfnUpdate(stack: "${serviceName}-stack",params:['createNewService': "${createNewService}",'serviceName': "${serviceName}",'taskDefImage': "${taskDefImage}",'networkMode': "${networkMode}", 'albSg': "${albSg}", 'subnet1': "${subnet1}", 'subnet2': "${subnet2}", 'vpc': "${vpc}", 'cluster': "${cluster}", 'roleArn': "${roleArn}", 'desiredCount': "${desiredCount}"], url:'https://ahsan-tf.s3-us-west-2.amazonaws.com/alb.yaml')
+        def outputs = cfnUpdate(stack: "${serviceName}-stack",params:['serviceName': "${serviceName}",'taskDefImage': "${taskDefImage}",'networkMode': "${networkMode}", 'albSg': "${albSg}", 'subnet1': "${subnet1}", 'subnet2': "${subnet2}", 'vpc': "${vpc}", 'cluster': "${cluster}", 'roleArn': "${roleArn}", 'desiredCount': "${desiredCount}"], url:'https://ahsan-tf.s3-us-west-2.amazonaws.com/alb.yaml')
          
     }
   }
