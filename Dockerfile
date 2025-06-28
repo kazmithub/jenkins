@@ -1,2 +1,2 @@
 FROM nginx:latest
-RUN echo "Hello! 10 commits" > /usr/share/nginx/html/index.html
+RUN echo "Hello! 9 commits" > /usr/share/nginx/html/index.html
