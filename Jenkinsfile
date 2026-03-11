@@ -12,7 +12,7 @@ node {
   docker.build('demo')
   // , 'ecr:us-west-2:demo-ecr-credentials'
   stage 'Docker push'
-  sh "$(aws ecr get-login --no-include-email --region us-west-2)"
+  sh "\$(aws ecr get-login --no-include-email --region us-west-2)"
   docker.withRegistry('https://853219876644.dkr.ecr.us-west-2.amazonaws.com') {
     docker.image('demo').push("${last_commit}")
     // docker.image('demo').push('new')
