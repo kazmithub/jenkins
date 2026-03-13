@@ -6,7 +6,7 @@ A jenkins server is configured on an  EC2 instance.
 
 ## Pre-requisutes
 
-Before reading this, 
+Before deployment, 
 - AWS account 
 - AWS services basic knowledge
 - Terraform knowledge
