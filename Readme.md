@@ -6,7 +6,7 @@ A jenkins server is configured on an  EC2 instance.
 
 ## Pre-requisutes
 
-Before deployment, 
+Pre-requisutes to this deployment are, 
 - AWS account 
 - AWS services basic knowledge
 - Terraform knowledge
@@ -14,7 +14,6 @@ Before deployment,
 - Extensive knowledge of Amazon ECS service 
 - Jenkins knowledge
 - Groovy syntax
-is required
 
 ## Modules
 
@@ -71,13 +70,13 @@ def last_commit= sh(script: "git rev-parse --short HEAD", returnStdout: true).tr
   docker.build('demo')
 # demo-ecr-credentials is the credentials ID in Jenkins.
   stage 'Docker push'
-  docker.withRegistry('https://853219876644.dkr.ecr.us-west-2.amazonaws.com', 'ecr:us-west-2:demo-ecr-credentials') {
+  docker.withRegistry('${RepoURI}', 'ecr:us-west-2:demo-ecr-credentials') {
     docker.image('demo').push("${last_commit}")
   }
   stage('Deploy') {
       sh "sed -i 's|{{image}}|${docker_repo_uri}:${last_commit}|' taskdef.json"
-      sh "aws ecs register-task-definition --execution-role-arn arn:aws:iam::853219876644:role/Jenkins --cli-input-json file://taskdef.json --region ${region}"
-      sh "aws ecs update-service --cluster ${cluster} --service v1-WebServer-Service --task-definition ${task_def_arn} --region ${region}"
+      sh "aws ecs register-task-definition --execution-role-arn arn:aws:iam::${AWS_ACCOUNT_NUMBER}:role/Jenkins --cli-input-json file://taskdef.json --region ${region}"
+      sh "aws ecs update-service --cluster ${cluster} --service ${ServiceName} --task-definition ${task_def_arn} --region ${region}"
   }
 ```
 ## Dockerfile
