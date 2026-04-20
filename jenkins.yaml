@@ -1,0 +1,59 @@
+# Jenkins Configuration as Code (JCasC)
+# Place this file in $JENKINS_HOME/jenkins.yaml
+# or mount via Docker: -v jenkins.yaml:/var/jenkins_home/jenkins.yaml
+
+jenkins:
+  systemMessage: "Jenkins configured via JCasC"
+  numExecutors: 2
+  mode: NORMAL
+  scmCheckoutRetryCount: 3
+
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: "${JENKINS_ADMIN_PASSWORD}"
+
+  authorizationStrategy:
+    roleBased:
+      roles:
+        global:
+          - name: "admin"
+            permissions:
+              - "Overall/Administer"
+            entries:
+              - user: "admin"
+          - name: "readonly"
+            permissions:
+              - "Overall/Read"
+              - "Job/Read"
+
+  clouds:
+    - amazonEC2:
+        name: "aws"
+        region: "us-east-1"
+        templates:
+          - ami: "ami-0123456789"
+            type: T3Medium
+            labels: "linux docker"
+
+unclassified:
+  location:
+    url: "https://jenkins.example.com/"
+
+  globalLibraries:
+    libraries:
+      - name: "shared-library"
+        defaultVersion: "main"
+        retriever:
+          modernSCM:
+            scm:
+              git:
+                remote: "https://github.com/org/jenkins-shared-library.git"
+
+tool:
+  git:
+    installations:
+      - name: "Default"
+        home: "git"
